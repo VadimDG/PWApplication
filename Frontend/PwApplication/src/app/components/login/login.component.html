@@ -1,0 +1,25 @@
+<div class="panel">
+    <h1>PW Application</h1>
+    <form [formGroup]="loginForm" novalidate (ngSubmit)="submit()">
+        <mat-form-field class="user-email-form-field" appearance="fill">
+            <mat-label>User email</mat-label>
+            <input formControlName="userEmail" matInput placeholder="">
+            
+            <mat-hint *ngIf="loginForm.controls['userEmail'].invalid && loginForm.controls['userEmail'].touched">Field cannot be empty</mat-hint>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Enter your password</mat-label>
+            <input formControlName="password" matInput [type]="hide ? 'password' : 'text'">
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+        </mat-form-field>
+        <div class="buttons">
+            <div class="wrapper">
+                <button type="submit"  mat-button>Login</button>
+                <button (click)="redirectToRegister()" mat-button>Register</button>
+            </div>
+        </div>
+    </form>
+</div>

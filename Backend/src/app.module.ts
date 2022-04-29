@@ -5,7 +5,7 @@ import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AccountsModule } from './accounts/accounts.module';
-import { TransactionSubscriber } from './transaction-history/transaction.subscriber';
+import { AppGateway } from './websocket/websocket.service';
 ;
 
 @Module({
@@ -18,7 +18,6 @@ import { TransactionSubscriber } from './transaction-history/transaction.subscri
       password: 'admin',
       database: 'boilerplateDb',
       entities: ["dist/**/*.entity{.ts,.js}"],
-      subscribers: [ TransactionSubscriber ],
       synchronize: true,
       autoLoadEntities: true
     }),
@@ -27,6 +26,6 @@ import { TransactionSubscriber } from './transaction-history/transaction.subscri
     AuthModule
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, AppGateway],
 })
 export class AppModule {}

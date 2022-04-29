@@ -21,7 +21,7 @@ export class UsersController {
     return 'user created';
   }
 
-  @UseGuards(JwtAuthGuard)
+  //@UseGuards(JwtAuthGuard)
   @HttpCode(200)
   @UsePipes(new UserNameValidationPipe())
   @Post('/transfer')
@@ -33,10 +33,4 @@ export class UsersController {
     }
     return 'transfer made';
   }
-
-  // @UseGuards(JwtAuthGuard)
-  // @Get('/search/:name')
-  // async findUserByName(@Param('name') name): Promise<string> {
-  //   return 'works';
-  // }
 }

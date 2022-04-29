@@ -1,0 +1,39 @@
+:host {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: beige;
+
+    .panel {
+        width: 250px;
+        padding: 10px;
+        border-radius: 7px;
+        border: 2px solid rgb(170, 161, 118);
+
+        h1 {
+            text-align: center;
+        }
+
+        mat-form-field {
+            margin-bottom: 25px;
+            margin-left: 6px;
+
+            &.user-email-form-field {
+                ::ng-deep .mat-form-field-infix {
+                    width: 212px !important;
+                }
+            }
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: end;
+            
+            .wrapper {
+                width: 152px;
+                
+            }
+        }
+    }
+}

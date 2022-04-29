@@ -1,3 +1,4 @@
+import { TransactionEntity } from './../transaction-history/transaction.entity';
 import { HttpStatus } from '@nestjs/common';
 import { HttpException } from '@nestjs/common';
 import { Injectable } from '@nestjs/common';
@@ -63,8 +64,15 @@ export class UsersService {
       userFrom.Accounts[0].Amount -= transferDto.amount;      
       userTo.Accounts[0].Amount = userTo.Accounts[0].Amount + Number(transferDto.amount);
 
-      await queryRunner.manager.save(userFrom);
-      await queryRunner.manager.save(userTo);
+      const updateUserEntityFrom = await queryRunner.manager.save(userFrom);
+      const updateUserEntityTo = await queryRunner.manager.save(userTo);
+
+      const transaction = new TransactionEntity();
+      transaction.SenderId = updateUserEntityFrom.id;
+      transaction.RecieverId = updateUserEntityTo.id;
+      transaction.Amount = transferDto.amount;
+      transaction.Date = new Date();
+      await queryRunner.manager.save(transaction);
       await queryRunner.commitTransaction();
     } catch (err) {
       console.error(err);
@@ -89,16 +97,4 @@ export class UsersService {
     }
     return null;
   }
-
-  // public async searchByName(name): Promise<number> {
-  //   const queryRunner = this.connection.createQueryRunner();
-  //   try{      
-  //     await queryRunner.connect();
-  //     const userFrom = await getRepository(UserEntity).createQueryBuilder('user').leftJoinAndSelect('user.Accounts', 'Account').where('user.Name = :name', { name }).getOne();
-  //   }
-  //   finally {
-  //     await queryRunner.release();
-  //   }
-  //   return 0;
-  // }
 }

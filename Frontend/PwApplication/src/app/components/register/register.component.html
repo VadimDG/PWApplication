@@ -1,0 +1,39 @@
+<div class="panel">
+    <h1>PW Application</h1>
+    <form [formGroup]="registerForm" novalidate (ngSubmit)="submit()">
+        <mat-form-field class="user-email-form-field" appearance="fill">
+            <mat-label>User email</mat-label>
+            <input formControlName="userName" matInput placeholder="">
+            
+            <mat-hint *ngIf="registerForm.controls['userName'].invalid && registerForm.controls['userName'].touched">Field cannot be empty</mat-hint>
+        </mat-form-field>
+        <mat-form-field class="user-email-form-field" appearance="fill">
+            <mat-label>User email</mat-label>
+            <input formControlName="userEmail" matInput placeholder="">
+            
+            <mat-hint *ngIf="registerForm.controls['userEmail'].invalid && registerForm.controls['userEmail'].touched">Field cannot be empty</mat-hint>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Enter your password</mat-label>
+            <input formControlName="password" matInput [type]="hide ? 'password' : 'text'">
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Re enter your password</mat-label>
+            <input formControlName="password2" matInput [type]="hide2 ? 'password' : 'text'">
+            <button mat-icon-button matSuffix (click)="hide2 = !hide2" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide2">
+                <mat-icon>{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+        </mat-form-field>
+        <div class="buttons">
+            <div class="wrapper">
+                <button type="submit"  mat-button>Register</button>
+                <button (click)="redirectToLogin()" mat-button>Login</button>
+            </div>
+        </div>
+    </form>
+</div>
