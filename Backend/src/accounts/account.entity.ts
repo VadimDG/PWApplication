@@ -1,5 +1,6 @@
 import { IsNotEmpty } from 'class-validator';
-import { UserEntity } from 'src/users/user.entity';
+import { UserDbWrapperEntity } from 'src/user-db-wrapper/user-db-wrapper.entity';
+
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 
 @Entity({ name: 'Account' })
@@ -11,6 +12,6 @@ export class AccountEntity {
   @IsNotEmpty()
   Amount: number;
 
-  @ManyToOne(() => UserEntity, (user) => user.Accounts)
-  User: UserEntity
+  @ManyToOne(() => UserDbWrapperEntity, (user) => user.Accounts)
+  User: UserDbWrapperEntity
 }

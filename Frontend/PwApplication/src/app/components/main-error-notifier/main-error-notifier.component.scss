@@ -1,0 +1,13 @@
+:host {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 10px 10px 50px;
+    font-size: 16pt;
+    color: #f77474;
+    
+    p {
+        font-size: 12pt;
+        font-weight: 600;
+        cursor: pointer;
+    }
+}

@@ -1,3 +1,6 @@
+import { MakeTransactionComponent } from './components/make-transaction/make-transaction.component';
+import { TransfersHistoryComponent } from './components/transfers-history/transfers-history.component';
+import { NotfoundComponent } from './components/notfound/notfound.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { MainComponent } from './components/main/main.component';
@@ -9,7 +12,9 @@ const routes: Routes = [
   { path: '', component: MainComponent, canActivate: [LoginGuard]},
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: '**', component: RegisterComponent }
+  { path: 'make-transaction', component: MakeTransactionComponent },
+  { path: 'transfers-history', component: TransfersHistoryComponent },
+  { path: '**', component: NotfoundComponent }
 ];
 
 @NgModule({

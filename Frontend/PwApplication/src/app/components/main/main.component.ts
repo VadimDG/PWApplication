@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { getLocalStorageValueByKey } from 'src/app/utils/services';
 
 @Component({
   selector: 'app-main',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainComponent implements OnInit {
 
+  public userName: string = '';
+  
   constructor() { }
 
   ngOnInit(): void {
+    const loggedinUser = getLocalStorageValueByKey('loggedinUser');
+    if (loggedinUser) {
+      this.userName = loggedinUser;
+    }
   }
 
 }

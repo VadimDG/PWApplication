@@ -1,3 +1,4 @@
+import { MainErrorNotifierService } from './../../services/main-error-notifier.service';
 import { UserService } from './../../services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -14,10 +15,13 @@ export class LoginComponent implements OnInit {
   public loginForm: FormGroup;
   public hide: boolean = true;
 
-  constructor(private readonly userService: UserService, private readonly router: Router) {
+  constructor(
+    private readonly userService: UserService, 
+    private readonly router: Router, 
+    private readonly mainErrorNotifierService: MainErrorNotifierService) {
     this.loginForm = new FormGroup({
-      "userEmail": new FormControl("", [ Validators.required, Validators.email ]),
-      "password": new FormControl("", [ Validators.required])
+      "userEmail": new FormControl("", [Validators.required, Validators.email]),
+      "password": new FormControl("", [Validators.required])
     });
   }
 
@@ -31,12 +35,17 @@ export class LoginComponent implements OnInit {
 
   submit(): void {
     if (this.loginForm.valid) {
-      
-      this.userService.getToken(this.loginForm.controls['userEmail'].value, this.loginForm.controls['userEmail'].value).subscribe(token => {
-        if (token) {
-          setLocalStorageValueByKey('token', token.id_token);
-        }
-      });
+
+      this.userService.getToken(this.loginForm.controls['userEmail'].value, this.loginForm.controls['userEmail'].value)
+        .subscribe({
+          next: token => {
+            if (token) {
+              setLocalStorageValueByKey('token', token.id_token);
+              setLocalStorageValueByKey('loggedinUser', this.loginForm.controls['userEmail'].value);
+            }
+          },
+          error: err => console.log(err)
+        });
       return;
     }
   }

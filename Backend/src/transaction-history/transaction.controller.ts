@@ -8,8 +8,8 @@ export class AppController {
   constructor(private readonly authService: AuthService, private readonly transactionsService: TransactionsService) {}
 
   @UseGuards(JwtAuthGuard)
-  @Get('api/transactions/:user')
+  @Get('api/protected/transactions')
   async login(@Param() user) {
-    return this.transactionsService.getByUser(user);
+    return [];
   }
 }

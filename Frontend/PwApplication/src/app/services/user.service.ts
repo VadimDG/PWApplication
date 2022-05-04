@@ -1,6 +1,6 @@
 import { BASE_PATH } from '../utils/constants';
-import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { first, Observable, of } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ITokenResponse } from '../models/token-response';
 
@@ -8,17 +8,20 @@ import { ITokenResponse } from '../models/token-response';
   providedIn: 'root',
 })
 export class UserService {
-  
-    private readonly USER_LOGIN_PATH = '/sessions/create';
-    private readonly USER_REGISTRATION_PATH = '/sessions/create';
 
-    constructor(private readonly http: HttpClient) { }
+  private readonly USER_LOGIN_PATH = '/sessions/create';
+  private readonly USER_REGISTRATION_PATH = '/users';
 
-    public getToken(email: string, password: string): Observable<ITokenResponse> {
-        return this.http.post<ITokenResponse>(`${BASE_PATH}${this.USER_LOGIN_PATH}`, {email, password});
-    }
+  constructor(private readonly http: HttpClient) { }
 
-    public register(name: string, email: string, password: string): Observable<ITokenResponse> {
-      return this.http.post<ITokenResponse>(`${BASE_PATH}${this.USER_REGISTRATION_PATH}`, {name, email, password });
+  public getToken(email: string, password: string): Observable<ITokenResponse> {
+    return this.http.post<ITokenResponse>(`${BASE_PATH}${this.USER_LOGIN_PATH}`, { email, password });
+  }
+
+  public register(name: string, email: string, password: string): Observable<ITokenResponse> {
+    let headers = new HttpHeaders();
+    headers = headers.set("Content-Type", "application/x-www-form-urlencoded");
+    const body = { name, email, password };
+    return this.http.post<ITokenResponse>(`${BASE_PATH}${this.USER_REGISTRATION_PATH}`, body, { headers }).pipe(first());
   }
 }

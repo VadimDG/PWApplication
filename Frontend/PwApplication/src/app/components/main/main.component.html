@@ -1,13 +1,18 @@
 <mat-toolbar color="primary">
-    <mat-toolbar-row>
-      <button mat-icon-button>
-        <mat-icon>menu</mat-icon>
-      </button>
-      <h1>PW</h1>
-      <span class="menu-spacer"></span>
-      <div>
-        <a mat-button [routerLink]="'/accounts'">Make transaction</a>
-        <a mat-button [routerLink]="'/create-account'">Transactions history</a>
-      </div>
-    </mat-toolbar-row>
-  </mat-toolbar>
+  <mat-toolbar-row>
+    <button mat-icon-button>
+      <mat-icon>menu</mat-icon>
+    </button>
+    <h1>PW</h1>
+    <span class="menu-spacer"></span>
+    <div>
+      <a mat-button [routerLink]="'/make-transaction'">Make transaction</a>
+      <a mat-button [routerLink]="'/transfers-history'">Transactions history</a>
+    </div>
+
+  </mat-toolbar-row>
+
+</mat-toolbar>
+<div class="user-info">
+  <h3>{{ userName }}</h3>
+</div>

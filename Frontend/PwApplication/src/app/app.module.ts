@@ -15,7 +15,10 @@ import { MatInputModule } from '@angular/material/input';
 import { HttpClientModule } from '@angular/common/http';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import {MatSidenavModule} from '@angular/material/sidenav';
-import { HeaderComponent } from './components/header/header.component';
+import { NotfoundComponent } from './components/notfound/notfound.component';
+import { MakeTransactionComponent } from './components/make-transaction/make-transaction.component';
+import { TransfersHistoryComponent } from './components/transfers-history/transfers-history.component';
+import { MainErrorNotifierComponent } from './components/main-error-notifier/main-error-notifier.component';
 
 
 @NgModule({
@@ -24,7 +27,10 @@ import { HeaderComponent } from './components/header/header.component';
     MainComponent,
     LoginComponent,
     RegisterComponent,
-    HeaderComponent
+    NotfoundComponent,
+    MakeTransactionComponent,
+    TransfersHistoryComponent,
+    MainErrorNotifierComponent
   ],
   imports: [
     BrowserModule,
