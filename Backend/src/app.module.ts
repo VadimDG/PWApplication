@@ -6,6 +6,7 @@ import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AccountsModule } from './accounts/accounts.module';
 import { AppGateway } from './websocket/websocket.service';
+import { TransactionsModule } from './transaction/transaction.module';
 ;
 
 @Module({
@@ -22,6 +23,7 @@ import { AppGateway } from './websocket/websocket.service';
       autoLoadEntities: true
     }),
     UsersModule,
+    TransactionsModule,
     AccountsModule,
     AuthModule
   ],

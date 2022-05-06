@@ -1,7 +1,7 @@
 import { UserDbWrapperEntity } from './../user-db-wrapper/user-db-wrapper.entity';
 import { UsersDbWrapperService } from './../user-db-wrapper/users-db-wrapper.service';
 import { AuthService } from 'src/auth/auth.service';
-import { TransactionEntity } from './../transaction-history/transaction.entity';
+import { TransactionEntity } from '../transaction/transaction.entity';
 import { HttpStatus } from '@nestjs/common';
 import { HttpException } from '@nestjs/common';
 import { Injectable } from '@nestjs/common';

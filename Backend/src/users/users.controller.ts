@@ -15,17 +15,4 @@ export class UsersController {
   async register(@Body() userDto: UserEntity): Promise<UserRegisterResponseDto> {
     return await this.service.register(userDto);
   }
-
-  // @UseGuards(JwtAuthGuard)
-  // @HttpCode(200)
-  // @UsePipes(new UserNameValidationPipe())
-  // @Post('/transfer')
-  // async transfer(@Body() transferDto: ITransferDto): Promise<string> {
-  //   const resp = await this.service.transfer(transferDto);
-    
-  //   if (resp !== 0) {
-  //     throw new BadRequestException('Error in users controller');
-  //   }
-  //   return 'transfer made';
-  // }
 }

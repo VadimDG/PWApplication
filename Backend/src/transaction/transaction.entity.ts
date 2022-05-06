@@ -1,7 +1,7 @@
 import { IsNotEmpty } from 'class-validator';
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
-export const ENTITY_NAME = 'Transactions1';
+export const ENTITY_NAME = 'Transactions';
 
 @Entity({ name: ENTITY_NAME })
 export class TransactionEntity {
@@ -14,11 +14,15 @@ export class TransactionEntity {
 
   @IsNotEmpty()
   @Column()
-  RecieverId: number;
+  ReceiverId: number;
 
   @IsNotEmpty()
   @Column()
-  Amount: number; 
+  Amount: number;
+
+  @IsNotEmpty()
+  @Column()
+  Balance: number;
 
   @Column()
   Date: Date;

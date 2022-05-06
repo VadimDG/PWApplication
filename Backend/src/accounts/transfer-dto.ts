@@ -1,6 +1,6 @@
 export interface ITransferDto {
-    nameFrom: string;
-    nameTo: string;
+    senderId: number;
+    receiverName: string;
     date?: Date;
     amount: number;
 }
