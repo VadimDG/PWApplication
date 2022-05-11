@@ -1,4 +1,4 @@
-export default () => ({
+const defaultOptions = {
   host: process.env.DB_HOST,
   type: 'mssql',
   port: parseInt(process.env.DB_PORT) || 3306,
@@ -8,4 +8,6 @@ export default () => ({
   entities: ['src/**/*.entity{.ts,.js}'],
   synchronize: process.env.DB_SYNCRONIZE === 'true',
   logging: process.env.DB_LOGGING === 'true'
-});
+};
+
+export default defaultOptions;

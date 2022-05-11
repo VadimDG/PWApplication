@@ -9,11 +9,18 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginGuard } from './guards/login-user.guard';
 
 const routes: Routes = [
-  { path: '', component: MainComponent, canActivate: [LoginGuard]},
+  {
+    path: '',
+    component: MainComponent,
+    children: [
+      { path: 'make-transaction', component: MakeTransactionComponent },
+      { path: 'transfers-history', component: TransfersHistoryComponent }
+    ],
+    canActivate: [LoginGuard]
+  },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'make-transaction', component: MakeTransactionComponent },
-  { path: 'transfers-history', component: TransfersHistoryComponent },
+
   { path: '**', component: NotfoundComponent }
 ];
 

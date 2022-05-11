@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from 'src/app/services/user.service';
 import { getLocalStorageValueByKey } from 'src/app/utils/services';
 
 @Component({
@@ -9,14 +10,15 @@ import { getLocalStorageValueByKey } from 'src/app/utils/services';
 export class MainComponent implements OnInit {
 
   public userName: string = '';
-  
-  constructor() { }
+  public balance: number = 0;
+  constructor(private readonly userService: UserService) { }
 
   ngOnInit(): void {
-    const loggedinUser = getLocalStorageValueByKey('loggedinUser');
-    if (loggedinUser) {
-      this.userName = loggedinUser;
-    }
+
+    this.userService.getLoggedUserInfo().subscribe(x => {
+      this.userName = x.name;
+      this.balance = x.balance;
+    });
   }
 
 }

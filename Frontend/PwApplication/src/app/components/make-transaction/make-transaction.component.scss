@@ -1,0 +1,14 @@
+:host {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: beige;
+
+    .transer-form {
+        width: 250px;
+        padding: 10px;
+        border-radius: 7px;
+        border: 2px solid rgb(170, 161, 118);
+    }
+}

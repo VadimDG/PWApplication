@@ -50,24 +50,21 @@ export class RegisterComponent implements OnInit {
   submit(): void {
 
     if (this.registerForm.valid) {
-      try {
-        this.userService.register(
-          this.registerForm.controls['userName'].value,
-          this.registerForm.controls['userEmail'].value,
-          this.registerForm.controls['password'].value
-        ).pipe(
-          catchError(error => {
-            if (error.error.message.length && error.error.message[0]) {
-              this.mainErrorNotifierService.setMainErrorMessage(error.error.message[0]);
-            }
-            return of(error);
-          })).subscribe(_ => {
-            this.router.navigateByUrl('/');
-          });
-      }
-      catch (err) {
-        console.log(err);
-      }
+
+      this.userService.register(
+        this.registerForm.controls['userName'].value,
+        this.registerForm.controls['userEmail'].value,
+        this.registerForm.controls['password'].value
+      ).pipe(
+        catchError(error => {
+          if (error.error.message.length && error.error.message[0]) {
+            this.mainErrorNotifierService.setMainErrorMessage(error.error.message[0]);
+          }
+          return of(error);
+        })).subscribe(_ => {
+          this.router.navigateByUrl('/');
+        });
+
 
       return;
     }
