@@ -36,12 +36,13 @@ export class LoginComponent implements OnInit {
   submit(): void {
     if (this.loginForm.valid) {
 
-      this.userService.getToken(this.loginForm.controls['userEmail'].value, this.loginForm.controls['userEmail'].value)
+      this.userService.getToken(this.loginForm.controls['userEmail'].value, this.loginForm.controls['password'].value)
         .subscribe({
           next: token => {
             if (token) {
-              setLocalStorageValueByKey('token', token.id_token);
+              setLocalStorageValueByKey('token', token.access_token);
               setLocalStorageValueByKey('loggedinUser', this.loginForm.controls['userEmail'].value);
+              this.router.navigateByUrl('/');
             }
           },
           error: err => console.log(err)

@@ -16,6 +16,7 @@ export class MainComponent implements OnInit {
   ngOnInit(): void {
 
     this.userService.getLoggedUserInfo().subscribe(x => {
+      console.log(x);
       this.userName = x.name;
       this.balance = x.balance;
     });

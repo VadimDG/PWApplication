@@ -1,9 +1,7 @@
-import { ITransferDto } from './../accounts/transfer-dto';
-import { BadRequestException, Body, Controller, Get, HttpCode, Post, UseGuards, UsePipes } from '@nestjs/common';
+import { Body, Controller, HttpCode, Post, UsePipes } from '@nestjs/common';
 import { UserRegisterResponseDto, UsersService } from './users.service';
 import { UserEntity } from './user.entity';
 import { UserNameValidationPipe } from './user-validation.pipe';
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @Controller('users')
 export class UsersController {

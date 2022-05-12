@@ -3,7 +3,6 @@ import { Column, PrimaryGeneratedColumn } from 'typeorm';
 
 export const ENTITY_NAME = 'PWUser';
 
-
 export class UserEntity {
   @PrimaryGeneratedColumn()
   id: number;

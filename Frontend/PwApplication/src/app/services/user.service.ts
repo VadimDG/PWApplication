@@ -18,7 +18,8 @@ export class UserService {
   constructor(private readonly http: HttpClient) { }
 
   public getToken(email: string, password: string): Observable<ITokenResponse> {
-    return this.http.post<ITokenResponse>(`${BASE_PATH}${this.USER_LOGIN_PATH}`, { email, password });
+    const body = { username: email, password };
+    return this.http.post<ITokenResponse>(`${BASE_PATH}${this.USER_LOGIN_PATH}`, body);
   }
 
   public register(name: string, email: string, password: string): Observable<ITokenResponse> {

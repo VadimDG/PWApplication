@@ -9,7 +9,7 @@
                [matAutocomplete]="auto"
                #userautocomplete>
         <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-          <mat-option *ngFor="let user of users$ | async" [value]="user">{{user.value}}</mat-option>
+          <mat-option *ngFor="let user of users$ | async" [value]="user">{{user.username}}</mat-option>
         </mat-autocomplete>
       </mat-form-field>
     <mat-form-field appearance="fill">

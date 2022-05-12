@@ -9,6 +9,7 @@ import { AppGateway } from './websocket/websocket.service';
 import { TransactionsModule } from './transaction/transaction.module';
 import { EventsModule } from './events/events.module';
 import * as defaultOptions from './config/database';
+import { UsersDbWrapperModule } from './user-db-wrapper/users-db-wrapper.module';
 
 
 @Module({
@@ -19,13 +20,14 @@ import * as defaultOptions from './config/database';
       port: 1433,
       username: 'admin',
       password: 'admin',
-      database: 'boilerplateDb',
+      database: 'pwdb',
       entities: ["dist/**/*.entity{.ts,.js}"],
       synchronize: true,
       autoLoadEntities: true
     }),
     UsersModule,
     TransactionsModule,
+    UsersDbWrapperModule,
     AccountsModule,
     AuthModule,
     EventsModule

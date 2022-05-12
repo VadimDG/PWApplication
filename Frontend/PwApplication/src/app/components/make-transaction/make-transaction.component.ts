@@ -17,7 +17,7 @@ export class MakeTransactionComponent implements OnInit {
   public userObj: any = {};
 
   constructor(private readonly userService: UserService, private readonly transferService: TransferService) { 
-    this.users$ = userService.getUsers();
+    this.users$ = userService.getUsers().pipe(tap(console.log));
   }
 
   ngOnInit(): void {
@@ -29,7 +29,9 @@ export class MakeTransactionComponent implements OnInit {
       debounceTime(1000),
       distinctUntilChanged(),
       map((event: any) => (<HTMLInputElement>event.target).value)
-      ).subscribe(x => this.users$ = this.userService.getUsers(x));
+      ).subscribe(x => {
+        this.users$ = this.userService.getUsers(x)
+      });
   }
 
   public makeTransfer(): void {
@@ -42,6 +44,6 @@ export class MakeTransactionComponent implements OnInit {
   }
 
   public displayFn(item: any): string {
-    return item ? item.value : '';
+    return item ? item.username : '';
   }
 }

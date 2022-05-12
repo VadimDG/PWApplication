@@ -2,9 +2,9 @@ import { AccountEntity } from '../accounts/account.entity';
 import { IsEmail, IsNotEmpty } from 'class-validator';
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
-export const ENTITY_NAME = 'PWUser';
+export const USER_ENTITY_NAME = 'PWUser';
 
-@Entity({ name: ENTITY_NAME })
+@Entity({ name: USER_ENTITY_NAME })
 export class UserDbWrapperEntity {
   @PrimaryGeneratedColumn()
   id: number;
