@@ -1,17 +1,19 @@
+import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
 
 @Injectable({
   providedIn: 'root',
 })
-export class SocketService extends Socket {
+export class SocketService {
 
-  constructor() {
-    super({ url: 'http://localhost:3001', options: {} });
-    this.on('connection', (socket: any) => {
-        console.log(`connected ${socket}`);
-    });
+  public socket$: Observable<any>;
+
+  constructor(private readonly socket: Socket) { 
+    this.socket$ = socket.fromEvent('balance')
   }
 
-  
+  public identifySocket(id: string): void {
+    this.socket.emit('identificationMsg', id);
+  }
 }

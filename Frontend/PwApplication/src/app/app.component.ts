@@ -1,6 +1,7 @@
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { MainErrorNotifierService } from './services/main-error-notifier.service';
+import { SocketService } from './services/socket.service';
 
 @Component({
   selector: 'app-root',
@@ -9,13 +10,7 @@ import { MainErrorNotifierService } from './services/main-error-notifier.service
 })
 export class AppComponent implements OnInit {
 
-  public isMainErrorNotifierVisible$: Observable<boolean>;
+  constructor() { }
 
-  constructor(private readonly mainErrorNotifierService: MainErrorNotifierService) {
-    this.isMainErrorNotifierVisible$ = mainErrorNotifierService.getVisibleState();
-    
-  }
-  ngOnInit(): void {
-    this.mainErrorNotifierService.hide();
-  }
+  ngOnInit(): void { }
 }

@@ -23,7 +23,9 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatTableModule } from '@angular/material/table';
 import { ErrorCatchingInterceptor } from './interceptors/error-catching.interceptor';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
-import { SocketIoModule } from 'ngx-socket-io';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+
+const config: SocketIoConfig = { url: 'http://localhost:3001', options: {} };
 
 @NgModule({
   declarations: [
@@ -51,7 +53,8 @@ import { SocketIoModule } from 'ngx-socket-io';
     MatToolbarModule,
     MatSidenavModule,
     MatAutocompleteModule,
-    MatTableModule
+    MatTableModule,
+    SocketIoModule.forRoot(config)
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

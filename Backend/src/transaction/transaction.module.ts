@@ -3,11 +3,13 @@ import { UsersDbWrapperModule } from './../user-db-wrapper/users-db-wrapper.modu
 import { Module } from '@nestjs/common';
 import { TransactionController } from './transaction.controller';
 import { TransactionsService } from './transaction.service';
+import { EventsModule } from 'src/events/events.module';
 
 @Module({
   imports: [
     AuthModule,
-    UsersDbWrapperModule
+    UsersDbWrapperModule,
+    EventsModule
   ],
   controllers: [TransactionController],
   providers: [TransactionsService],

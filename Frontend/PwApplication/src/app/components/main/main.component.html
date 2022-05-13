@@ -1,3 +1,4 @@
+<app-main-error-notifier [ngClass]="{'isHidden': !(isMainErrorNotifierVisible$ | async) }"></app-main-error-notifier>
 <mat-toolbar color="primary">
   <mat-toolbar-row>
     <button mat-icon-button>
@@ -11,10 +12,11 @@
     </div>
 
   </mat-toolbar-row>
-
+  <div class="user-info">
+    <h3>{{ userName }}</h3>
+    <h3>{{ balance }}</h3>
+    <button mat-button (click)="logout()">Logout</button>
+  </div>
 </mat-toolbar>
-<div class="user-info">
-  <h3>{{ userName }}</h3>
-  <h3>{{ balance }}</h3>
-</div>
+
 <router-outlet></router-outlet>

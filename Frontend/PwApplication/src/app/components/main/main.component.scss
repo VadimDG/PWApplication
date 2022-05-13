@@ -9,14 +9,19 @@ mat-sidenav {
 main {
     padding: 10px;
 }
-
-.user-info {
-    position: absolute;
-    top: 16px;
-    right: 10px;
-    h3 {
-        display: inline;
-        color: white;
-        margin-right: 20px;
+mat-toolbar {
+    position: relative;
+    .user-info {
+        position: absolute;
+        top: 16px;
+        right: 10px;
+        h3 {
+            display: inline;
+            color: white;
+            margin-right: 20px;
+        }
     }
+}
+.isHidden {
+    display: none;
 }

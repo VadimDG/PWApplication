@@ -13,10 +13,14 @@ export class AppController {
     private readonly usersDbWrapperService: UsersDbWrapperService
   ) {}
 
+  @Get('heartbit')
+  heardBit() {
+    return 'ok';
+  } 
+
   @UseGuards(LocalAuthGuard)
   @Post('sessions/create')
   async login(@Request() req) {
-    console.log(req.user);
     const user = await this.usersDbWrapperService.findUserByEmail(req.user.email);
     return this.authService.login({email: req.user.email, id: user.id });
   }
@@ -39,8 +43,8 @@ export class AppController {
     
     const transferDto = {
       senderId:  tokenPayload.sub,
-      receiverName: req.nameTo,
-      amount: req.amount
+      receiverId: req.body.userId,
+      amount: req.body.amount
     };
     return this.transactionsService.transfer(transferDto);
   }
@@ -50,7 +54,7 @@ export class AppController {
   async userInfo(@Request() req) {
     const token = req.header('authorization').split(' ')[1];
     
-    const tokenPayload = (JSON.parse(atob(token.split('.')[1])))
+    const tokenPayload = (JSON.parse(atob(token.split('.')[1])));
 
     const user = await this.usersDbWrapperService.findUserById(tokenPayload.sub);
     return {
@@ -64,7 +68,13 @@ export class AppController {
 
   @UseGuards(JwtAuthGuard)
   @Post('api/protected/users/list')
-  async usersList(@Body() req) {
-    return this.usersDbWrapperService.getUsersByFilter(req.filter);
+  async usersList(@Request() req) {
+    const token = req.header('authorization').split(' ')[1];
+    
+    const tokenPayload = (JSON.parse(atob(token.split('.')[1])));
+
+    const users = await this.usersDbWrapperService.getUsersByFilter(req.body.filter);
+    
+    return users.filter(x => x.id !== tokenPayload.sub);
   }
 }

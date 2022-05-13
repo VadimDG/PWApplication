@@ -23,10 +23,7 @@ export class UserService {
   }
 
   public register(name: string, email: string, password: string): Observable<ITokenResponse> {
-    let headers = new HttpHeaders();
-    headers = headers.set("Content-Type", "application/x-www-form-urlencoded");
-    const body = { name, email, password };
-    return this.http.post<ITokenResponse>(`${BASE_PATH}${this.USER_REGISTRATION_PATH}`, body, { headers }).pipe(first());
+    return this.http.post<ITokenResponse>(`${BASE_PATH}${this.USER_REGISTRATION_PATH}`, { username: name, email, password }).pipe(first());
   }
 
   public getLoggedUserInfo(): Observable<IUserInfo> {

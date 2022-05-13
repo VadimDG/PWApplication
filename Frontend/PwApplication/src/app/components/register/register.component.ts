@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { catchError, of } from 'rxjs';
+import { ITokenResponse } from 'src/app/models/token-response';
 import { MainErrorNotifierService } from 'src/app/services/main-error-notifier.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -61,7 +62,8 @@ export class RegisterComponent implements OnInit {
             this.mainErrorNotifierService.setMainErrorMessage(error.error.message[0]);
           }
           return of(error);
-        })).subscribe(_ => {
+        })).subscribe(x  => {
+          localStorage.setItem('token', x.id_token);
           this.router.navigateByUrl('/');
         });
 
@@ -69,8 +71,9 @@ export class RegisterComponent implements OnInit {
       return;
     }
   }
-  redirectToLogin(): void {
-    this.router.navigateByUrl('/register');
+  redirectToLogin(event: Event): void {
+    event.stopImmediatePropagation();
+    this.router.navigateByUrl('login');
   }
 
 }

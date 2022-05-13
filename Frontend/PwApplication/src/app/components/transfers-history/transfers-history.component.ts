@@ -14,6 +14,13 @@ export class TransfersHistoryComponent implements OnInit {
   constructor(private readonly transactionsService: TransactionsService) { }
 
   ngOnInit(): void {
+    this.transactionsService.listTransactions().subscribe(x => this.dataSource = x.trans_token.map(y => ({
+      id: y.id,
+      date: y.date,
+      username: y.username,
+      amount: y.amount,
+      balance: y.balance
+    })) as any);
   }
 
 }

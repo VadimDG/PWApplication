@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { setLocalStorageValueByKey } from 'src/app/utils/services';
 import { Router } from '@angular/router';
+import { SocketService } from 'src/app/services/socket.service';
 
 @Component({
   selector: 'app-login',
@@ -17,8 +18,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private readonly userService: UserService, 
-    private readonly router: Router, 
-    private readonly mainErrorNotifierService: MainErrorNotifierService) {
+    private readonly router: Router
+  ) {
     this.loginForm = new FormGroup({
       "userEmail": new FormControl("", [Validators.required, Validators.email]),
       "password": new FormControl("", [Validators.required])

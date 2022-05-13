@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from "@angular/router";
 import { Observable } from "rxjs";
+import { tokenExpired } from "../utils/services";
 
 @Injectable()
 export class LoginGuard implements CanActivate {
@@ -14,6 +15,12 @@ export class LoginGuard implements CanActivate {
             this.router.navigateByUrl('/login');
             return false;
         }
+
+        if (tokenExpired(token)) {
+            this.router.navigateByUrl('/login');
+            return false;
+        }
+
         return true;
     }
 }

@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { debounceTime, distinctUntilChanged, fromEvent, map, Observable, of, pipe, tap } from 'rxjs';
+import { SocketService } from 'src/app/services/socket.service';
 import { TransferService } from 'src/app/services/transefer.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -16,8 +17,11 @@ export class MakeTransactionComponent implements OnInit {
   public amount: string = '';
   public userObj: any = {};
 
-  constructor(private readonly userService: UserService, private readonly transferService: TransferService) { 
-    this.users$ = userService.getUsers().pipe(tap(console.log));
+  constructor(
+    private readonly userService: UserService, 
+    private readonly transferService: TransferService
+  ) { 
+    this.users$ = userService.getUsers();
   }
 
   ngOnInit(): void {
@@ -36,7 +40,8 @@ export class MakeTransactionComponent implements OnInit {
 
   public makeTransfer(): void {
     if (this.userObj.id && +this.amount > 0) {
-      this.transferService.makeTransfer(this.userObj.id, +this.amount).subscribe(_ => console.log('success'));
+      this.transferService.makeTransfer(this.userObj.id, +this.amount).subscribe();
+      
     }
     else {
       console.error('transaction input parameters are incorrect');
